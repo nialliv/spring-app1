@@ -1,7 +1,9 @@
 package ru.kit.springcourse;
 
-public class ClassicalMusic implements Music{
+import org.springframework.stereotype.Component;
 
+@Component("classicalMusicBean")
+public class ClassicalMusic implements Music{
     @Override
     public String getSong() {
         return "Hungarian Rhapsody";

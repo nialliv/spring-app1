@@ -38,6 +38,10 @@ public class MusicPlayer {
         this.musicList = musicList;
     }
 
+    public MusicPlayer(Music music) {
+        this.musicList.add(music);
+    }
+
     public MusicPlayer() {
     }
 
