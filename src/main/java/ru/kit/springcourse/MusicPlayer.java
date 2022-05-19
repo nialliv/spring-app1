@@ -8,7 +8,7 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
+@Component("musicPlayer")
 @Scope("prototype")
 public class MusicPlayer {
 

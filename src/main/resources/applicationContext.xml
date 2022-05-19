@@ -6,27 +6,8 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
-
+    <context:component-scan base-package="ru.kit.springcourse" />
     <context:property-placeholder location="musicPlayer.properties"/>
 
-    <bean id="ClassicalMusic" class="ru.kit.springcourse.ClassicalMusic"/>
-    <bean id="RockMusic" class="ru.kit.springcourse.RockMusic"/>
-    <bean id="PopMusic" class="ru.kit.springcourse.PopMusic"/>
 
-    <bean id="musicList" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="ClassicalMusic" />
-                <ref bean="RockMusic" />
-                <ref bean="PopMusic" />
-            </list>
-        </constructor-arg>
-    </bean>
-
-    <bean id="musicPlayer"
-          class="ru.kit.springcourse.MusicPlayer">
-        <property name="musicList" ref="musicList"/>
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
 </beans>
