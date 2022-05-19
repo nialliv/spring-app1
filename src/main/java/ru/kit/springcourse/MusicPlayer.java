@@ -1,54 +1,54 @@
 package ru.kit.springcourse;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.util.Random;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@Component
+@Scope("prototype")
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
+
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
+
+    private final ClassicalMusic classicalMusic;
+    private final RockMusic rockMusic;
+
+    @PostConstruct
+    public void doMyInit() {
+        System.out.println("I'm initialization");
+    }
+
+    @PreDestroy
+    public void doMyDestroy() {
+        System.out.println("I'm destroyed");
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public List<Music> getMusicList() {
-        return musicList;
-    }
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-
-    //IoC
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public MusicPlayer(Music music) {
-        this.musicList.add(music);
-    }
-
     public MusicPlayer() {
+        this.classicalMusic = new ClassicalMusic();
+        this.rockMusic = new RockMusic();
     }
 
-
-    public void playMusic() {
-        for (Music i : musicList) {
-            System.out.println("Playing: " + i.getSong());
+    public void playMusic(GenreOfMusic music) {
+        int index = (new Random()).nextInt(3);
+        if (music == GenreOfMusic.CLASSICAL) {
+            System.out.println("Playing: " + classicalMusic.getSongs().get(index));
+        } else {
+            System.out.println("Playing: " + rockMusic.getSongs().get(index));
         }
     }
 }

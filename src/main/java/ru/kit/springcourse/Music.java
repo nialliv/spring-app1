@@ -1,6 +1,7 @@
 package ru.kit.springcourse;
 
-public interface Music {
-    String getSong();
+import java.util.List;
 
+public interface Music {
+    List<String> getSongs();
 }
